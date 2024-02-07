@@ -1,0 +1,6 @@
+Build a CRUD App with React.js and Redux Toolkit for Beginners
+"React Redux CRUD App"
+
+Link: https://www.youtube.com/watch?v=DOkSU3yg4vQ
+
+Vite with ESLint: https://www.robinwieruch.de/vite-eslint/
