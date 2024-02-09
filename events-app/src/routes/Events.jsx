@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteEvent } from '../redux/eventsSlice';
 import Modal from '../components/Modal';
+import { toast } from 'react-toastify';
 
 const Events = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const Events = () => {
   const handleYes = () => {
     dispatch(deleteEvent(selectedEvent));
     setIsModalVisible(false);
+    toast.success('Event successfully deleted!');
   };
 
   const handleNo = () => {

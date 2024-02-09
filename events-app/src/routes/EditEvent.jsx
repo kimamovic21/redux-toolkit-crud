@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateEvent } from '../redux/eventsSlice';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const EditEvent = () => {
   const { id } = useParams();
@@ -23,6 +24,7 @@ const EditEvent = () => {
 
   const onSubmit = (data) => {
     dispatch(updateEvent({ id, updatedEvent: data }));
+    toast.success('Event successfully edited!');
     navigate('/events');
   };
 
@@ -113,7 +115,7 @@ const EditEvent = () => {
           className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 duration-200"
           type="submit"
         >
-          Update Event
+          Save Changes
         </button>
       </form>
     </div>

@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { addEvent } from '../redux/eventsSlice';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const CreateEvent = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -10,6 +11,7 @@ const CreateEvent = () => {
 
   const onSubmit = (data) => {
     dispatch(addEvent({ id: new Date().getTime().toString(), ...data }));
+    toast.success('Event successfully created!');
     navigate('/events');
   };
 

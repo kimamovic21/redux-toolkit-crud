@@ -4,6 +4,8 @@ import PageNotFound from "./components/PageNotFound"
 import Events from "./routes/Events"
 import CreateEvent from "./routes/CreateEvent"
 import EditEvent from "./routes/EditEvent"
+import { ToastContainer } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (
@@ -15,6 +17,7 @@ const App = () => {
         <Route path="/events/edit/:id" element={<EditEvent />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
+      <ToastContainer />
     </Router>
   )
 }
