@@ -1,28 +1,15 @@
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { addEvent } from '../redux/eventsSlice';
 import { Link, useNavigate } from 'react-router-dom';
 
 const CreateEvent = () => {
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const dispatch = useDispatch();
-  const [eventData, setEventData] = useState({
-    id: new Date().getTime().toString(), 
-    title: '',
-    location: '',
-    date: '',
-    image: '',
-    description: '',
-  });
-
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setEventData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
-  const handleSubmit = () => {
-    dispatch(addEvent(eventData));
+  const onSubmit = (data) => {
+    dispatch(addEvent({ id: new Date().getTime().toString(), ...data }));
     navigate('/events');
   };
 
@@ -36,81 +23,78 @@ const CreateEvent = () => {
       </Link>
       <h2 className="mt-4 text-2xl font-semibold mb-4">Create Event</h2>
 
-      <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">
-          Event Title
-        </label>
-        <input
-          className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
-          type="text"
-          name="title"
-          value={eventData.title}
-          onChange={handleChange}
-          placeholder="Event Title"
-        />
-      </div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">
+            Event Title
+          </label>
+          <input
+            {...register("title", { required: true })}
+            className={`w-full px-3 py-2 border rounded-md focus:outline-none ${errors.title ? 'border-red-500' : 'focus:border-blue-500'}`}
+            type="text"
+            placeholder="Event Title"
+          />
+          {errors.title && <p className="text-red-500">Title is required</p>}
+        </div>
 
-      <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="location">
-          Event Location
-        </label>
-        <input
-          className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
-          type="text"
-          name="location"
-          value={eventData.location}
-          onChange={handleChange}
-          placeholder="Event Location"
-        />
-      </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="location">
+            Event Location
+          </label>
+          <input
+            {...register("location", { required: true })}
+            className={`w-full px-3 py-2 border rounded-md focus:outline-none ${errors.location ? 'border-red-500' : 'focus:border-blue-500'}`}
+            type="text"
+            placeholder="Event Location"
+          />
+          {errors.location && <p className="text-red-500">Location is required</p>}
+        </div>
 
-      <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="date">
-          Event Date
-        </label>
-        <input
-          className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
-          type="date"
-          name="date"
-          value={eventData.date}
-          onChange={handleChange}
-          placeholder="Event Date"
-        />
-      </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="date">
+            Event Date
+          </label>
+          <input
+            {...register("date", { required: true })}
+            className={`w-full px-3 py-2 border rounded-md focus:outline-none ${errors.date ? 'border-red-500' : 'focus:border-blue-500'}`}
+            type="date"
+            placeholder="Event Date"
+          />
+          {errors.date && <p className="text-red-500">Date is required</p>}
+        </div>
 
-      <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="image">
-          Event Image URL
-        </label>
-        <input
-          className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
-          type="text"
-          name="image"
-          value={eventData.image}
-          onChange={handleChange}
-          placeholder="Event Image URL"
-        />
-      </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="image">
+            Event Image URL
+          </label>
+          <input
+            {...register("image", { required: true })}
+            className={`w-full px-3 py-2 border rounded-md focus:outline-none ${errors.image ? 'border-red-500' : 'focus:border-blue-500'}`}
+            type="text"
+            placeholder="Event Image URL"
+          />
+          {errors.image && <p className="text-red-500">Image URL is required</p>}
+        </div>
 
-      <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
-          Event Description
-        </label>
-        <textarea
-          className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
-          name="description"
-          value={eventData.description}
-          onChange={handleChange}
-          placeholder="Event Description"
-        ></textarea>
-      </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
+            Event Description
+          </label>
+          <textarea
+            {...register("description", { required: true })}
+            className={`w-full px-3 py-2 border rounded-md focus:outline-none ${errors.description ? 'border-red-500' : 'focus:border-blue-500'}`}
+            placeholder="Event Description"
+          />
+          {errors.description && <p className="text-red-500">Description is required</p>}
+        </div>
 
-      <button
-        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 duration-200"
-        onClick={handleSubmit}
-      >
-        Add Event
-      </button>
+        <button
+          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 duration-200"
+          type="submit"
+        >
+          Add Event
+        </button>
+      </form>
     </div>
   );
 };
