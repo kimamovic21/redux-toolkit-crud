@@ -28,7 +28,8 @@ const Users = () => {
 
   return (
     <div className="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-md shadow-md">
-      <div className="flex justify-between mb-4">
+      <Link to='/' className='text-blue-700'>Back To Home</Link>
+      <div className="mt-4 flex justify-between mb-4">
         <h2 className="text-2xl font-semibold">Users</h2>
         <Link to="/users/create" className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 duration-200">
           Create User

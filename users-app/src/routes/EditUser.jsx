@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateUser } from '../redux/usersSlice';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const EditUser = () => {
   const { id } = useParams();
@@ -48,7 +48,8 @@ const EditUser = () => {
 
   return (
     <div className="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-md shadow-md">
-      <h2 className="text-2xl font-semibold mb-4">Edit User</h2>
+      <Link to='/users' className='text-blue-700'>Back to Users</Link>
+      <h2 className="mt-4 text-2xl font-semibold mb-4">Edit User</h2>
       <form onSubmit={handleSaveChanges}>
         <div className="mb-4">
           <label htmlFor="firstName" className="block text-gray-600">

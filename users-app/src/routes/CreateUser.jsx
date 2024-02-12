@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../redux/usersSlice';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const CreateUser = () => {
   const dispatch = useDispatch();
@@ -37,7 +37,8 @@ const CreateUser = () => {
 
   return (
     <div className="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-md shadow-md">
-      <h2 className="text-2xl font-semibold mb-4">Create User</h2>
+      <Link to='/users' className='text-blue-700'>Back to Users</Link>
+      <h2 className="mt-4 text-2xl font-semibold mb-4">Create User</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label htmlFor="firstName" className="block text-gray-600">
