@@ -1,0 +1,7 @@
+React JS REDUX crud actions using JSON-SERVER API | React redux crud actions | React Redux tutorial
+
+Link: https://www.youtube.com/watch?v=MEtQTB_xyMc
+
+
+JSON server: json-server --watch data/db.json --port 8000
+React: npm start
